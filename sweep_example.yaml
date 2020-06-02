@@ -1,0 +1,26 @@
+program: train.py
+method: bayes
+metric:
+  name: avg_win
+  goal: maximize
+parameters:
+  episode:
+    distribution: int_uniform
+    min: 500
+    max: 2000000
+  discount:
+    distribution: uniform
+    min: 0.01
+    max: 0.95
+  decay_factor:
+    distribution: uniform
+    min: 0.9
+    max: 0.9999999
+  learning_rate:
+    values: [0.0000001,0.000001,0.00001,0.0001,0.001,0.01,0.1,1]
+  exploration_rate:
+    distribution: uniform
+    min: 0.0
+    max: 0.95
+  debug:
+    value: 0 

@@ -3,9 +3,9 @@ from environment import environment
 config = {
     'discount': 0.95,
     'exploration_rate':0.9,
-    'decay_factor':0.9999,
+    'decay_factor':0.9,
     'learning_rate':0.01,
-    'episode':100000,
+    'episode':1000,
     'debug' : 0,
 }
 
