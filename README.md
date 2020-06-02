@@ -1,9 +1,11 @@
 # AI Agent For Game BlackJack
 This repository's goal is to train a blackjack agent. 
 
-This rrepository is currentlly under progress. You can follow the status by checking the project board [here](https://github.com/hakanonal/blackjack/projects/1).
+This repository is mostly completetd via this project board [here](https://github.com/hakanonal/blackjack/projects/1). It is curentlly on training process. You can watch the training process via [this](https://app.wandb.ai/hakanonal/blackjack) dashboard
 
-As a habbit I also keep a journal for myself. I keep it as jupyter notebook [here](experiment.ipynb).
+As a habbit I also keep a journal for myself. I keep it as jupyter notebook [here](experiment.ipynb). You can read see my development process.
+
+In regular basis a commit the best policy to the repository. You can use [this]() notebook to check the q-values in the q-table.
 
 This idea has been started with a conversation that I have made with my nephew. He asked me if we could build an AI agent that plays the best moves for blackjack. After some arguing on the topic, we have agreed that it would be overkill to train a deep net. Hence there were already best posible moves avaible. However this table only keeps the best action to play in a total matrix of player and dealer. So we have agreed to at least to construct a q-value table via reinforcement learning. We are expecting to construct a q-value table that will consists of the best move to to make (Hit,Double,Stand) in percentages. Our intension is to keep it simple so we will not implement the full rrules of the game. We will consider Ace as 1 not 11. I've learned that this is called hard totals. And also we will not add the double action to action space. The avaible best moves are as follows:
 
