@@ -1,4 +1,5 @@
 from environment import environment
+import os
 
 config = {
     'discount': 0.95,
@@ -8,6 +9,7 @@ config = {
     'episode':1000,
     'debug' : 0,
 }
+os.environ['WANDB_MODE'] = 'dryrun'
 
 e = environment(config=config)
 
