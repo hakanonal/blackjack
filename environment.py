@@ -100,7 +100,7 @@ class environment:
         winner = 0
         if self.state['player_sum'] > 21:
             if self.state['dealer_sum'] > 21:
-                winner = -1
+                winner = 0
             else:
                 winner = -1
         else:
