@@ -1,6 +1,6 @@
 # AI Agent For Game BlackJack
 
-This repository's goal is to train a blackjack agent. 
+This repository's goal is to train a blackjack agent using reinforcement learning. 
 
 ## Background and Scope
 
