@@ -27,11 +27,13 @@ class environment:
         }
 
     def initGame(self):
-        self.state = {'player_sum':0,'dealer_sum':0} 
-        self.state['player_sum'] += self.hit()
-        self.state['player_sum'] += self.hit()
-        self.state['dealer_sum'] += self.hit()
+        self.state = {'player_sum':0,'dealer_sum':0, 'usable_ace': False} 
+        self.state,_ = self.play(1)
+        self.state,_ = self.play(1)
+        self.dealer_usable_ace = False
+        self.state,_ = self.playDealer()
         self.actions_played = []
+        
 
     def start(self):
         for episode in range(1,self.config['episode']+1):
@@ -80,17 +82,32 @@ class environment:
         new_state = self.state.copy()
         ended = False
         if action:
-            new_state['player_sum'] += self.hit()
+            new_card = self.hit()
+            new_state['player_sum'] += new_card
+            if new_card == 1 and new_state['player_sum'] <= 11:
+                new_state['player_sum'] += 10
+                new_state['usable_ace'] = True
         else:
             ended = True
         if new_state['player_sum'] > 21:
-            ended = True
+            if new_state['usable_ace']:
+                new_state['player_sum'] -= 10
+                new_state['usable_ace'] = False
+            else:
+                ended = True
         return new_state, ended
         
     def playDealer(self):
         new_state = self.state.copy()
         ended = False
-        new_state['dealer_sum'] += self.hit()
+        new_card = self.hit()
+        new_state['dealer_sum'] += new_card
+        if new_card == 1 and new_state['dealer_sum'] <= 11:
+            new_state['dealer_sum'] += 10
+            self.dealer_usable_ace = True
+        if new_state['dealer_sum'] > 21 and self.dealer_usable_ace:
+            new_state['dealer_sum'] -= 10
+            self.dealer_usable_ace = False
         if new_state['dealer_sum'] >= 17:
             ended = True
         return new_state, ended

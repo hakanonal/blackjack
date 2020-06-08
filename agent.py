@@ -15,8 +15,7 @@ class agent:
     def get_next_action(self, state):
         if random.random() < self.exploration_rate: # Explore (gamble) or exploit (greedy)
             return self.random_action()
-        else:
-            return self.greedy_action(state)
+        return self.greedy_action(state)
 
     def greedy_action(self, state):
         return np.argmax(self.getQ(state))
