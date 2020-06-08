@@ -3,10 +3,10 @@ import os
 
 config = {
     'discount': 0.94,
-    'exploration_rate':0.5,
-    'decay_factor':0.99,
+    'exploration_rate':0.9,
+    'decay_factor':0.9999,
     'learning_rate':0.0001,
-    'episode':10000,
+    'episode':1000000,
     'debug' : 0,
 }
 os.environ['WANDB_MODE'] = 'dryrun'
@@ -15,6 +15,6 @@ e = environment(config=config)
 
 e.start()
 e.agent.save()
-e.agent.printQTable()
+e.agent.printAllQTable()
 print(e.metrics)
  

@@ -25,9 +25,10 @@ class agent:
     def getQ(self,state):
         player_sum = state['player_sum']
         dealer_sum = state['dealer_sum']
-        if (player_sum,dealer_sum) not in self.q_table:
-            self.q_table[(player_sum,dealer_sum)] = [0,0]
-        return self.q_table[(player_sum,dealer_sum)]
+        usable_ace = state['usable_ace']
+        if (player_sum,dealer_sum,usable_ace) not in self.q_table:
+            self.q_table[(player_sum,dealer_sum,usable_ace)] = [0,0]
+        return self.q_table[(player_sum,dealer_sum,usable_ace)]
 
     def train(self, old_state, new_state, action, reward):
         
@@ -36,7 +37,7 @@ class agent:
 
         old_state_prediction = ((1-self.learning_rate) * old_state_prediction) + (self.learning_rate * (reward + self.discount * np.amax(new_state_prediction)))
 
-        self.q_table[(old_state['player_sum'],old_state['dealer_sum'])][action] = old_state_prediction
+        self.q_table[(old_state['player_sum'],old_state['dealer_sum'],old_state['usable_ace'])][action] = old_state_prediction
         return old_state_prediction
 
     def update(self, old_state, new_state, action, reward):        
@@ -55,36 +56,48 @@ class agent:
         self.q_table = pickle.load(fr)
         fr.close()        
 
-    def toNumPy(self):
-        d = np.zeros((22,11,2))
+    def toNumPy(self, usable_ace = False):
+        d = np.zeros((22,12,2))
         for state,alist in self.q_table.items():
             if(state[0] > 21):
                 continue
-            if(state[1] > 10):
+            if(state[1] > 11):
+                continue
+            if(state[2] != usable_ace):
                 continue
             d[state[0]][state[1]][0] = alist[0]
             d[state[0]][state[1]][1] = alist[1]
         return d
 
-    def printQTable(self):
+    def printAllQTable(self):
+        d = self.toNumPy(False)
+        print("No Usable Ace")
+        self.printQTable(d)
+        d = self.toNumPy(True)
+        print("Has Usable Ace")
+        self.printQTable(d)  
+
+    def printQTable(self,d):
         _sign = lambda x: x and (1, -1)[x<0]
-        d = self.toNumPy()
         print("---------------------------------------------------------------------------------------------------------------------------")
-        print("  |     1     |     2     |     3     |     4     |     5     |     6     |     7     |     8     |     9     |    10     |")
+        print("  |     2     |     3     |     4     |     5     |     6     |     7     |     8     |     9     |    10     |     A     |")
         for i in range(1,22):
             print("%02d|"%i, end="")
-            for j in range(1,11):
+            for j in range(2,12):
                 if _sign(d[i][j][0]) == 1:
                     print("\x1b[1;32;40m%05.2f\x1b[0m"%d[i][j][0],end="|")
                 if _sign(d[i][j][0]) == -1:
                     print("\x1b[1;31;40m%05.2f\x1b[0m"%abs(d[i][j][0]),end="|")
+                if(d[i][j][0] == 0):
+                    print("\x1b[1;33;40m%05.2f\x1b[0m"%abs(d[i][j][0]),end="|")
                 if _sign(d[i][j][1]) == 1:
                     print("\x1b[6;32;47m%05.2f\x1b[0m"%d[i][j][1],end="|")
                 if _sign(d[i][j][1]) == -1:
                     print("\x1b[6;31;47m%05.2f\x1b[0m"%abs(d[i][j][1]),end="|")
-                if(d[i][j][0] == 0):
-                    print("\x1b[1;31;40m%05.2f\x1b[0m"%abs(d[i][j][0]),end="|")
                 if(d[i][j][1] == 0):
-                    print("\x1b[6;31;47m%05.2f\x1b[0m"%abs(d[i][j][1]),end="|")
+                    print("\x1b[6;33;47m%05.2f\x1b[0m"%abs(d[i][j][1]),end="|")
+
             print("")
         print("---------------------------------------------------------------------------------------------------------------------------")
+        print("---------------------------------------------------------------------------------------------------------------------------")
+        print("")
