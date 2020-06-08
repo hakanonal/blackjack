@@ -22,6 +22,6 @@ In regular basis I commit the best policy to the repository. You can use [this](
 
 ![Example Output](example_output.png)
 
-Addtionally we have decided to expand the scope and include the full rules of the blackjack (hard/soft totals and include double action). This addittional scope is curentlly under development.
+Addtionally we have decided to expand the scope and include the full rules of the blackjack (hard/soft totals and include double action). This addittional scope is curentlly under development. We have completed the hard/soft totals distinction in a seperate branch called [soft-total](https://github.com/hakanonal/blackjack/tree/soft-total).
 
 If you have any contrubutions please do not hesitade to open a [new issue](https://github.com/hakanonal/blackjack/issues/new).
