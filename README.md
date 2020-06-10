@@ -16,7 +16,7 @@ As a habbit I keep a journal for myself. I keep it as jupyter notebook [here](ex
 
 ## Conclusion
 
-This repository is mostly completetd via this project board [here](https://github.com/hakanonal/blackjack/projects/1). It is curentlly on training process. You can watch the training process via [this](https://app.wandb.ai/hakanonal/blackjack) dashboard. 
+This repository is mostly completetd via this project board [here](https://github.com/hakanonal/blackjack/projects/1). It is curentlly on training process. You can watch the training process via [this](https://app.wandb.ai/hakanonal/blackjack/reports/Blackjack-AI-Agent-Performance-Results--VmlldzoxMzc0Nzk) dashboard. 
 
 In regular basis I commit the best policy to the repository. You can use [this](https://github.com/hakanonal/blackjack/blob/master/qtable.ipynb) notebook to check the q-values in the q-table. Please note that instead of putting the percentages of each action to take we have leaved the q-values as it is. To understand the relative difference between values better, we have presented the data grraphiclly like shown below. 
 
