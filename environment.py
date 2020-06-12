@@ -76,7 +76,9 @@ class environment:
             wandb.log(self.metrics,step=episode)
 
     def hit(self):
-        return random.randint(1,10)
+        cards = [1,2,3,4,5,6,7,8,9,10,10,10,10]
+        hit_index = random.randint(0,12)
+        return cards[hit_index]
 
     def play(self,action):
         new_state = self.state.copy()
