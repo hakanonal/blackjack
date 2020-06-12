@@ -9,4 +9,4 @@ def train():
     print(e.metrics)  
 
 
-wandb.agent('hakanonal/blackjack/5frlvae6',function=train)
+wandb.agent('hakanonal/blackjack/isd5kgjv',function=train)
